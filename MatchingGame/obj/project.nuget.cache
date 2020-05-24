@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zWSrHycVw8XC8FLyUO2oLoA1lxB3aulyYRu0dDZyc1TP21gNGPbOzwx0V2me21QkVy1FWzmIy7845JLWwSjV4A==",
+  "success": true,
+  "projectFilePath": "C:\\Workspace\\MatchingGame\\WPFMatchingGame\\MatchingGame\\MatchingGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Saitz Tower\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
