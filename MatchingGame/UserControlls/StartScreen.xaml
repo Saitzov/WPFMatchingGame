@@ -6,24 +6,39 @@
              xmlns:local="clr-namespace:MatchingGame.UserControlls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <StackPanel>
-            <ComboBox Height="35" Margin="0,5" 
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Background="Green" Grid.Column="0">
+            <Label HorizontalAlignment="Center" Content="Play" FontSize="80"/>
+            <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                <ComboBox Height="35" Margin="0,5" 
                       ItemsSource="{Binding FieldSizeList}" 
                       SelectedItem="{Binding SelectedFieldSize}"
                       IsSynchronizedWithCurrentItem="True"
                       SelectedIndex="0"
                       >
-            </ComboBox>
-            <ComboBox Height="35" Margin="0,5" 
+                </ComboBox>
+                <ComboBox Height="35" Margin="0,5" 
                       ItemsSource="{Binding FolderList}" 
                       SelectedItem="{Binding SelectedFolder}"
                       IsSynchronizedWithCurrentItem="True"
                       >
-            </ComboBox>
-            <Button x:Name="btn_GameStart" Height="50" Width="150" Content="Start new Game"  Margin="0,5" />
+                </ComboBox>
+                <Button x:Name="btn_GameStart" Height="50" Width="150" Content="Start new Game"  Margin="0,5" />
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Background="Orange" >
+            <Label HorizontalAlignment="Center" Content="More" FontSize="80"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btn_CreateOwnGame" Height="50" Width="150" Content="Create your own Game"  Margin="0,5" />
         </StackPanel>
+        </Grid>
         
+
 
     </Grid>
 </UserControl>

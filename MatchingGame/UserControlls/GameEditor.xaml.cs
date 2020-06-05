@@ -1,5 +1,4 @@
-﻿using MatchingGame.Models;
-using MatchingGame.ViewModels;
+﻿using MatchingGame.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,22 +11,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MatchingGame.Enums.MatchingGameEnums;
 
 namespace MatchingGame.UserControlls
 {
     /// <summary>
-    /// Interaktionslogik für GameField.xaml
+    /// Interaktionslogik für GameEditor.xaml
     /// </summary>
-    public partial class GameField : UserControl
+    public partial class GameEditor : UserControl
     {
-        private GameViewModel gameViewModel;
-
-        public GameField(GameContent content, FieldSize size)
+        private GameEditorViewModel viewModel;
+        public GameEditor()
         {
             InitializeComponent();
-            gameViewModel = new GameViewModel(content, size);
-            this.DataContext = gameViewModel;
+            viewModel = new GameEditorViewModel();
+            this.DataContext = viewModel;
         }
     }
 }

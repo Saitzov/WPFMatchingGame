@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatchingGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MatchingGame" Height="600" Width="800"
         FontSize="{Binding ViewConfig.FontSize}">
     <Grid Name="MainGrid" >
         <ContentPresenter Content="{Binding CurrentView}">

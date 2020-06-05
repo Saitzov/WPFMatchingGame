@@ -20,6 +20,7 @@ namespace MatchingGame.ViewModels
 
         StartScreen startScreen;
         GameField gameField;
+        GameEditor gameEditor;
 
         public MainWindowViewModel()
         {            
@@ -31,7 +32,8 @@ namespace MatchingGame.ViewModels
         {
             startScreen = new StartScreen();
             this.startScreen.btn_GameStart.Click += Click_StartNewGame;
-        }
+            this.startScreen.btn_CreateOwnGame.Click += Btn_CreateOwnGame_Click;
+        }        
 
         private void ChangeMainUserControl(UserControl userControl)
         {
@@ -40,11 +42,11 @@ namespace MatchingGame.ViewModels
 
         private void StartNewGame()
         {
-            var gameFolder = startScreen.ViewModel.SelectedFolder;
+            var gameContent = startScreen.ViewModel.SelectedFolder;
 
-            if(!string.IsNullOrWhiteSpace(gameFolder))
+            if(gameContent != null)
             {
-                gameField = new GameField(gameFolder);
+                gameField = new GameField(gameContent, Enums.MatchingGameEnums.FieldSize.Sixteen);
                 gameField.btn_back.Click += Btn_back_Click;
                 ChangeMainUserControl(gameField);
             }
@@ -60,6 +62,12 @@ namespace MatchingGame.ViewModels
         private void Click_StartNewGame(object sender, System.Windows.RoutedEventArgs e)
         {
             StartNewGame();
+        }
+
+        private void Btn_CreateOwnGame_Click(object sender, RoutedEventArgs e)
+        {
+            gameEditor = new GameEditor();
+            ChangeMainUserControl(gameEditor);
         }
 
 

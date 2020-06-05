@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MatchingGame.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,8 +9,9 @@ namespace MatchingGame.ViewModels
 {
     public class StartScreenViewModel
     {
-        public string SelectedFolder { get; set; }
-        public List<string> FolderList { get; set; }
+        private string contentDirectory = Environment.CurrentDirectory + "\\Content";
+        public GameContent SelectedFolder { get; set; }
+        public List<GameContent> FolderList { get; set; }
 
         public string SelectedFieldSize { get; set; }
         public List<string> FieldSizeList { get; set; }
@@ -29,8 +31,7 @@ namespace MatchingGame.ViewModels
             
         private void FillFolderList()
         {
-            FolderList = new List<string>();
-            string contentDirectory = Environment.CurrentDirectory + "\\Content" ;
+            FolderList = new List<GameContent>();            
 
             var contentEntries = Directory.GetDirectories(contentDirectory)
                             .Select(p => new {
@@ -40,12 +41,22 @@ namespace MatchingGame.ViewModels
 
             foreach(var entry in contentEntries)
             {
-                var picCount = Directory.EnumerateFiles(entry.Path, "*.png", SearchOption.TopDirectoryOnly).Count();
+                GameContent game = new GameContent();
+                game.FolderName = entry.Name;
+                game.FolderPath = entry.Path;
+                game.AssetsPath = $"{entry.Path}\\Assets";
+                game.AmountOfPictures = this.CountPictureInFolder(game.AssetsPath);
 
-                FolderList.Add($"{entry.Name} [{picCount / 2} Pairs]");
-
+                FolderList.Add(game);
             }
 
+        }
+
+        private int CountPictureInFolder(string path)
+        {
+            return Directory.Exists(path)
+                ? Directory.EnumerateFiles(path, "*.png", SearchOption.TopDirectoryOnly).Count()
+                : 0;
         }
     }
 }
