@@ -12,26 +12,87 @@ namespace MatchingGame.ViewModels
 {
     public class GameViewModel
     {
+        #region Properties & Members
         private const string fieldItemFile = "FieldItems.csv";
         private const string fieldPairFile = "FieldPairs.csv";
+        private bool isFirstPick = true;
+        private int FirstPick = -1;
+
+        private string coverPath = "cover.png";
         private GameContent Content { get; set; }
-        private List<FieldItem> FieldItems { get; set; }
+        private List<FieldItem> AllFieldItems { get; set; }
+        public List<FieldItem> UsedFieldItems { get; set; }
         private List<FieldPairs> FieldPairs { get; set; }
         private FieldSize FieldSize { get; set; }
+
+        #endregion
+
+        
 
         public GameViewModel(GameContent content, FieldSize fieldSize)
         {
             this.Content = content;
             this.FieldSize = fieldSize;
             InitGame();
+            TurnOverAllFields(false);
+        }
+
+        public void ClickField(int pickId)
+        {
+            TurnOverField(pickId, true);
+            if (isFirstPick)            
+            {
+                FirstPick = pickId;                
+                isFirstPick = false;
+                return;
+            }
+            else
+            {
+                CheckPics(FirstPick, pickId);
+            }
+        }
+
+
+        private void CheckPics(int idA, int idB)
+        {
+
+        }
+
+        private void TurnOverField(int itemId, bool showSolution)
+        {
+            var field = UsedFieldItems.First(i => i.Id == itemId);
+
+            if(showSolution)
+            {
+                field.CurrentDisplayPath = field.PicturePath;
+            }
+        }
+
+        private void TurnOverAllFields(bool ShowSolution)
+        {
+            foreach(var item in UsedFieldItems)
+            {
+                item.CurrentDisplayPath = ShowSolution ? item.PicturePath : this.Content.FolderPath + "\\Cover.png";
+            }
         }
 
         private void InitGame()
         {
             try
             {
-                this.FieldItems = this.LoadFieldItems();
+                this.AllFieldItems = this.LoadFieldItems();
                 this.FieldPairs = this.LoadFieldPairs();
+
+                this.UsedFieldItems = new List<FieldItem>();
+                foreach (var pair in this.FieldPairs)
+                {
+                    this.UsedFieldItems.Add(pair.FieldA);
+                    this.UsedFieldItems.Add(pair.FieldB);
+                }
+                UsedFieldItems.Shuffle();
+
+                
+
             }
             catch(Exception ex)
             {
@@ -55,8 +116,8 @@ namespace MatchingGame.ViewModels
 
                     FieldPairs pair = new FieldPairs();
 
-                    pair.FieldA = this.FieldItems.First(i => i.Id == Convert.ToInt32(values[0]));
-                    pair.FieldB = this.FieldItems.First(i => i.Id == Convert.ToInt32(values[1]));
+                    pair.FieldA = this.AllFieldItems.First(i => i.Id == Convert.ToInt32(values[0]));
+                    pair.FieldB = this.AllFieldItems.First(i => i.Id == Convert.ToInt32(values[1]));
                     pair.Description = values[2];
 
                     res.Add(pair);

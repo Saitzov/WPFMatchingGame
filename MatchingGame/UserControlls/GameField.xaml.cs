@@ -29,5 +29,14 @@ namespace MatchingGame.UserControlls
             gameViewModel = new GameViewModel(content, size);
             this.DataContext = gameViewModel;
         }
+
+        private void Click_Field(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is Image)
+            {
+                FieldItem item = (FieldItem)(sender as System.Windows.Controls.Image).DataContext;
+                gameViewModel.ClickField(item.Id);
+            }
+        }
     }
 }

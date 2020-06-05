@@ -13,7 +13,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid  ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -27,15 +27,33 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>        
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="A"  />
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="B"  />
-        <TextBlock Grid.Row="0" Grid.Column="3" Text="C"  />
-        <TextBlock Grid.Row="0" Grid.Column="4" Text="D"  />
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="1"  />
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="2"  />
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="3"  />
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="4"  />
+        </Grid.RowDefinitions>
+
+        <Image Margin="2" x:Name="A1" Grid.Row="1" Grid.Column="1" DataContext="{Binding UsedFieldItems[0]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A2" Grid.Row="1" Grid.Column="2" DataContext="{Binding UsedFieldItems[1]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A3" Grid.Row="1" Grid.Column="3" DataContext="{Binding UsedFieldItems[2]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A4" Grid.Row="1" Grid.Column="4" DataContext="{Binding UsedFieldItems[3]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B1" Grid.Row="2" Grid.Column="1" DataContext="{Binding UsedFieldItems[4]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B2" Grid.Row="2" Grid.Column="2" DataContext="{Binding UsedFieldItems[5]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B3" Grid.Row="2" Grid.Column="3" DataContext="{Binding UsedFieldItems[6]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B4" Grid.Row="2" Grid.Column="4" DataContext="{Binding UsedFieldItems[7]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C1" Grid.Row="3" Grid.Column="1" DataContext="{Binding UsedFieldItems[8]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C2" Grid.Row="3" Grid.Column="2" DataContext="{Binding UsedFieldItems[9]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C3" Grid.Row="3" Grid.Column="3" DataContext="{Binding UsedFieldItems[10]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C4" Grid.Row="3" Grid.Column="4" DataContext="{Binding UsedFieldItems[11]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D1" Grid.Row="4" Grid.Column="1" DataContext="{Binding UsedFieldItems[12]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D2" Grid.Row="4" Grid.Column="2" DataContext="{Binding UsedFieldItems[13]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D3" Grid.Row="4" Grid.Column="3" DataContext="{Binding UsedFieldItems[14]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D4" Grid.Row="4" Grid.Column="4" DataContext="{Binding UsedFieldItems[15]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="1"  />
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="2"  />
+        <TextBlock Grid.Row="0" Grid.Column="3" Text="3"  />
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="4"  />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="A"  />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="B"  />
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="C"  />
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="D"  />
         <Button Name="btn_back" Grid.Column="0" Grid.Row="0" Width="40" Height="40" Content="Back" />
     </Grid>
 </UserControl>
