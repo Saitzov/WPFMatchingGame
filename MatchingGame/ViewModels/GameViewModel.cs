@@ -40,6 +40,7 @@ namespace MatchingGame.ViewModels
         public void ClickField(int pickId)
         {
             TurnOverField(pickId, true);
+            
             if (isFirstPick)            
             {
                 FirstPick = pickId;                
@@ -49,13 +50,36 @@ namespace MatchingGame.ViewModels
             else
             {
                 CheckPics(FirstPick, pickId);
+                isFirstPick = true;
             }
         }
 
 
         private void CheckPics(int idA, int idB)
         {
+            
 
+            if(IsPickCorrect(idA, idB, out FieldPairs pair))
+            {
+
+            }
+            else
+            {
+                TurnOverField(idA, false);
+                TurnOverField(idB, false);
+            }
+        }
+
+        private bool IsPickCorrect(int idA, int idB, out FieldPairs pairs)
+        {
+            pairs = null;
+            bool res = false;
+
+            var pair = FieldPairs.First(p => p.FieldA.Id == idA || p.FieldB.Id == idA);
+
+
+
+            return res;
         }
 
         private void TurnOverField(int itemId, bool showSolution)
