@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="MatchingGame.UserControlls.GameField28"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MatchingGame.UserControlls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="Green" Foreground="Beige">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid x:Name="MainGrid"  ShowGridLines="True" Visibility="Visible">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Margin="2" x:Name="A1" Grid.Row="1" Grid.Column="1" DataContext="{Binding UsedFieldItems[0]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A2" Grid.Row="1" Grid.Column="2" DataContext="{Binding UsedFieldItems[1]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A3" Grid.Row="1" Grid.Column="3" DataContext="{Binding UsedFieldItems[2]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A4" Grid.Row="1" Grid.Column="4" DataContext="{Binding UsedFieldItems[3]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A5" Grid.Row="1" Grid.Column="5" DataContext="{Binding UsedFieldItems[4]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A6" Grid.Row="1" Grid.Column="6" DataContext="{Binding UsedFieldItems[5]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="A7" Grid.Row="1" Grid.Column="7" DataContext="{Binding UsedFieldItems[6]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        
+        <Image Margin="2" x:Name="B1" Grid.Row="2" Grid.Column="1" DataContext="{Binding UsedFieldItems[7]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B2" Grid.Row="2" Grid.Column="2" DataContext="{Binding UsedFieldItems[8]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B3" Grid.Row="2" Grid.Column="3" DataContext="{Binding UsedFieldItems[9]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B4" Grid.Row="2" Grid.Column="4" DataContext="{Binding UsedFieldItems[10]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B5" Grid.Row="2" Grid.Column="5" DataContext="{Binding UsedFieldItems[11]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B6" Grid.Row="2" Grid.Column="6" DataContext="{Binding UsedFieldItems[12]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="B7" Grid.Row="2" Grid.Column="7" DataContext="{Binding UsedFieldItems[13]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        
+        <Image Margin="2" x:Name="C1" Grid.Row="3" Grid.Column="1" DataContext="{Binding UsedFieldItems[14]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C2" Grid.Row="3" Grid.Column="2" DataContext="{Binding UsedFieldItems[15]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C3" Grid.Row="3" Grid.Column="3" DataContext="{Binding UsedFieldItems[16]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C4" Grid.Row="3" Grid.Column="4" DataContext="{Binding UsedFieldItems[17]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C5" Grid.Row="3" Grid.Column="5" DataContext="{Binding UsedFieldItems[18]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C6" Grid.Row="3" Grid.Column="6" DataContext="{Binding UsedFieldItems[19]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="C7" Grid.Row="3" Grid.Column="7" DataContext="{Binding UsedFieldItems[20]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        
+        <Image Margin="2" x:Name="D1" Grid.Row="4" Grid.Column="1" DataContext="{Binding UsedFieldItems[21]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D2" Grid.Row="4" Grid.Column="2" DataContext="{Binding UsedFieldItems[22]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D3" Grid.Row="4" Grid.Column="3" DataContext="{Binding UsedFieldItems[23]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D4" Grid.Row="4" Grid.Column="4" DataContext="{Binding UsedFieldItems[24]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D5" Grid.Row="4" Grid.Column="5" DataContext="{Binding UsedFieldItems[25]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D6" Grid.Row="4" Grid.Column="6" DataContext="{Binding UsedFieldItems[26]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+        <Image Margin="2" x:Name="D7" Grid.Row="4" Grid.Column="7" DataContext="{Binding UsedFieldItems[27]}" Source="{Binding CurrentDisplayPath}" MouseDown="Click_Field"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="1"  />
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="2"  />
+        <TextBlock Grid.Row="0" Grid.Column="3" Text="3"  />
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="4"  />
+        <TextBlock Grid.Row="0" Grid.Column="5" Text="5"  />
+        <TextBlock Grid.Row="0" Grid.Column="6" Text="6"  />
+        <TextBlock Grid.Row="0" Grid.Column="7" Text="7"  />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="A"  />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="B"  />
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="C"  />
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="D"  />
+        <Button Name="btn_back" Grid.Column="0" Grid.Row="0" Width="40" Height="40" Content="Back" />
+    </Grid>
+        <Grid x:Name="BonusGrid" Visibility="Hidden">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="PairHeadline" Grid.Row="0" Grid.Column="0" Text="What is the headline / topic of both pictures? " />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Image Margin="2" x:Name="LeftImage"  Grid.Column="0" Source="{Binding FieldA.CurrentDisplayPath}" />
+                <Image Margin="2" x:Name="RightImage" Grid.Column="1" Source="{Binding FieldB.CurrentDisplayPath}" />
+                <TextBlock x:Name="PicA" Grid.Row="1" Grid.Column="0" Text="What is Picture A?" />
+                <TextBlock x:Name="PicB" Grid.Row="1" Grid.Column="1" Text="What is Picutre B?"/>
+
+            </Grid>
+           
+        </Grid>
+    </Grid>
+</UserControl>

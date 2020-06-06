@@ -9,7 +9,16 @@ namespace MatchingGame.Models
         public string FolderName { get; set; }
         public string FolderPath { get; set; }
         public string AssetsPath { get; set; }
+        public string CoverPath
+        {
+            get
+            {
+                return this.FolderPath + "\\Cover.png";
+            }
+        }
+
         public int AmountOfPictures { get; set; }
+
 
         public List<FieldItem> FieldItems = new List<FieldItem>();
 

@@ -1,0 +1,17 @@
+﻿<Window x:Class="MatchingGame.Views.AdminPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MatchingGame.Views"
+        mc:Ignorable="d"
+        Title="AdminPanel" Height="200" Width="200">
+    <Grid>
+        <StackPanel>
+            <Button Margin="2" Height="30" Width="100" Content="Show All" Click="ShowAllClick" />
+            <Button Margin="2" Height="30" Width="100" Content="Show Nothing" Click="ShowNothing" />
+            <Button Margin="2" Height="30" Width="100" Content="Show BonusResults" Click="ShowBonusResults" />
+            <Button Margin="2" Height="30" Width="100" Content="Close Bonus" Click="CloseBonus" />
+        </StackPanel>
+    </Grid>
+</Window>

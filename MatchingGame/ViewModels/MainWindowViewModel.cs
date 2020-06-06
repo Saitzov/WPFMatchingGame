@@ -13,13 +13,15 @@ namespace MatchingGame.ViewModels
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         UserControl currentView;
+        GameConfig config = new GameConfig();
+
         public UserControl CurrentView { get { return currentView; } set {currentView = value;NotifyPropertyChanged(); } }
 
 
         ViewConfig ViewConfig = new ViewConfig();
 
         StartScreen startScreen;
-        GameField gameField;
+        GameField28 gameField;
         GameEditor gameEditor;
 
         public MainWindowViewModel()
@@ -33,6 +35,10 @@ namespace MatchingGame.ViewModels
             startScreen = new StartScreen();
             this.startScreen.btn_GameStart.Click += Click_StartNewGame;
             this.startScreen.btn_CreateOwnGame.Click += Btn_CreateOwnGame_Click;
+
+            config.FieldSize = Enums.MatchingGameEnums.FieldSize.TwentyEight;
+            config.WithBonusGame = true;
+            config.WithAdminPanel = true;
         }        
 
         private void ChangeMainUserControl(UserControl userControl)
@@ -44,9 +50,9 @@ namespace MatchingGame.ViewModels
         {
             var gameContent = startScreen.ViewModel.SelectedFolder;
 
-            if(gameContent != null)
+            if (gameContent != null)
             {
-                gameField = new GameField(gameContent, Enums.MatchingGameEnums.FieldSize.Sixteen);
+                gameField = new GameField28(gameContent, config);
                 gameField.btn_back.Click += Btn_back_Click;
                 ChangeMainUserControl(gameField);
             }
@@ -54,9 +60,7 @@ namespace MatchingGame.ViewModels
             {
                 MessageBox.Show("Please Select a Folder");
             }
-            
         }
-
 
         #region Event Handling
         private void Click_StartNewGame(object sender, System.Windows.RoutedEventArgs e)

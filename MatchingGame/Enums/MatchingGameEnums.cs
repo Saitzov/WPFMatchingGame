@@ -9,6 +9,7 @@ namespace MatchingGame.Enums
         public enum FieldSize
         {
             Sixteen = 16,
+            TwentyEight = 28,
         }
     }
 }

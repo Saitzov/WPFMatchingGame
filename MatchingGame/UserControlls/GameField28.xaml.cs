@@ -1,5 +1,7 @@
-﻿using MatchingGame.Models;
+﻿using MatchingGame.Interface;
+using MatchingGame.Models;
 using MatchingGame.ViewModels;
+using MatchingGame.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,27 +19,35 @@ using static MatchingGame.Enums.MatchingGameEnums;
 namespace MatchingGame.UserControlls
 {
     /// <summary>
-    /// Interaktionslogik für GameField.xaml
+    /// Interaktionslogik für GameField28.xaml
     /// </summary>
-    public partial class GameField : UserControl
+    public partial class GameField28 : UserControl, IGameField
     {
         private GameViewModel gameViewModel;
-
-        public GameField(GameContent content, GameConfig size)
+        public GameField28(GameContent content, GameConfig config)
         {
             InitializeComponent();
-            gameViewModel = new GameViewModel(content, size, null);
+            gameViewModel = new GameViewModel(content, config, this);
             this.DataContext = gameViewModel;
+
+            if(config.WithAdminPanel)
+            {
+                AdminPanel adminPanel = new AdminPanel(gameViewModel);
+                adminPanel.Show();
+            }
 
         }
 
-        private void Click_Field(object sender, MouseButtonEventArgs e)
+        void Click_Field(object sender, MouseButtonEventArgs e)
         {
-            if(sender is Image)
+            if (sender is Image)
             {
-                FieldItem item = (FieldItem)(sender as System.Windows.Controls.Image).DataContext;
+                var img = sender as Image;
+                FieldItem item = (FieldItem)img.DataContext;
                 gameViewModel.ClickField(item.Id);
             }
         }
     }
+
+
 }

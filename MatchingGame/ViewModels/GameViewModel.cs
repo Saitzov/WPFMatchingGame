@@ -7,6 +7,11 @@ using System.Text;
 using System.Windows;
 using MatchingGame.Extension;
 using static MatchingGame.Enums.MatchingGameEnums;
+using System.Windows.Controls;
+using MatchingGame.Interface;
+using MatchingGame.UserControlls;
+using System.Windows.Controls.Primitives;
+using System.Threading.Tasks;
 
 namespace MatchingGame.ViewModels
 {
@@ -17,86 +22,141 @@ namespace MatchingGame.ViewModels
         private const string fieldPairFile = "FieldPairs.csv";
         private bool isFirstPick = true;
         private int FirstPick = -1;
-
-        private string coverPath = "cover.png";
+        private int SecondPick = -1;
         private GameContent Content { get; set; }
         private List<FieldItem> AllFieldItems { get; set; }
         public List<FieldItem> UsedFieldItems { get; set; }
         private List<FieldPairs> FieldPairs { get; set; }
-        private FieldSize FieldSize { get; set; }
+        private GameConfig GameConfig { get; set; }
+        FieldPairs LastPair;
+
+        private GameField28 View;
 
         #endregion
 
-        
 
-        public GameViewModel(GameContent content, FieldSize fieldSize)
+
+        public GameViewModel(GameContent content, GameConfig config, GameField28 view)
         {
             this.Content = content;
-            this.FieldSize = fieldSize;
+            this.GameConfig = config;
+            this.View = view;
+
             InitGame();
+            
             TurnOverAllFields(false);
+
         }
 
         public void ClickField(int pickId)
         {
+            
             TurnOverField(pickId, true);
+            
             
             if (isFirstPick)            
             {
+                //TurnOverField(pickId, true);
                 FirstPick = pickId;                
                 isFirstPick = false;
                 return;
             }
             else
             {
+                //TurnOverField(pickId, true);
+                SecondPick = pickId;
                 CheckPics(FirstPick, pickId);
                 isFirstPick = true;
             }
         }
 
-
         private void CheckPics(int idA, int idB)
-        {
-            
+        {            
 
-            if(IsPickCorrect(idA, idB, out FieldPairs pair))
+            if(IsPickCorrect(idA, idB))
             {
+                if(this.GameConfig.WithBonusGame)
+                {
+                    ShowBonusGame();
+                }                
 
             }
             else
             {
-                TurnOverField(idA, false);
-                TurnOverField(idB, false);
+                Task.Delay(2000).ContinueWith(_ =>
+                {
+                    TurnOverField(idA, false);
+                    TurnOverField(idB, false);
+                });
+                
             }
         }
 
-        private bool IsPickCorrect(int idA, int idB, out FieldPairs pairs)
+        private void ShowBonusGame()
         {
-            pairs = null;
+            this.View.MainGrid.Visibility = Visibility.Hidden;
+            this.View.BonusGrid.Visibility = Visibility.Visible;
+            this.View.BonusGrid.DataContext = LastPair;
+        }
+
+        public void CloseBonusGame()       
+        {            
+            this.View.BonusGrid.Visibility = Visibility.Hidden;
+            this.View.MainGrid.Visibility = Visibility.Visible;
+            View.PairHeadline.Text = "What is the headline / topic of both pictures?";
+            View.PicA.Text = "What is Picture A?";
+            View.PicB.Text = "What is Picutre B?";
+        }
+
+        public void ShowBonusResult()
+        {
+            View.PairHeadline.Text = LastPair.Description;
+            View.PicA.Text = LastPair.FieldA.Description;
+            View.PicB.Text = LastPair.FieldB.Description;
+        }
+
+        private bool IsPickCorrect(int idA, int idB)
+        {
+            LastPair = null;
             bool res = false;
 
             var pair = FieldPairs.First(p => p.FieldA.Id == idA || p.FieldB.Id == idA);
 
+            bool a = pair.FieldA.Id == idA || pair.FieldA.Id == idB;
+            bool b = pair.FieldB.Id == idA || pair.FieldB.Id == idB;
 
+            res = a == true && b == true;
+
+            if (res)
+            {
+                LastPair = pair;
+            }
 
             return res;
         }
 
         private void TurnOverField(int itemId, bool showSolution)
         {
+            if (itemId == -1)
+                return;
+
             var field = UsedFieldItems.First(i => i.Id == itemId);
 
             if(showSolution)
             {
                 field.CurrentDisplayPath = field.PicturePath;
             }
+            else
+            {
+                field.CurrentDisplayPath = this.Content.CoverPath;
+            }
         }
 
-        private void TurnOverAllFields(bool ShowSolution)
+        public void TurnOverAllFields(bool ShowSolution)
         {
             foreach(var item in UsedFieldItems)
             {
-                item.CurrentDisplayPath = ShowSolution ? item.PicturePath : this.Content.FolderPath + "\\Cover.png";
+                item.CurrentDisplayPath = ShowSolution ? item.PicturePath : this.Content.CoverPath;
             }
         }
 
@@ -149,7 +209,7 @@ namespace MatchingGame.ViewModels
 
                 res.Shuffle();
 
-                int takeAmount = (int)this.FieldSize/ 2;
+                int takeAmount = (int)this.GameConfig.FieldSize/ 2;
                 res = res.Take(takeAmount).ToList();
 
                 return res;
