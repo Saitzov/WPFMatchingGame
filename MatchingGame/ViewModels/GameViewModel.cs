@@ -12,36 +12,54 @@ using MatchingGame.Interface;
 using MatchingGame.UserControlls;
 using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace MatchingGame.ViewModels
 {
-    public class GameViewModel
+    public class GameViewModel : INotifyPropertyChanged
     {
         #region Properties & Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private const string fieldItemFile = "FieldItems.csv";
         private const string fieldPairFile = "FieldPairs.csv";
         private bool isFirstPick = true;
         private int FirstPick = -1;
         private int SecondPick = -1;
+
+        private BonusGame bonusGame;
+
+
+
+        public BonusGame BonusGame
+        {
+            get
+            {
+                return bonusGame;
+            }
+            set
+            {
+                bonusGame = value;
+                OnPropertyChanged("BonusGame");
+            }
+        }
+
+
         private GameContent Content { get; set; }
         private List<FieldItem> AllFieldItems { get; set; }
         public List<FieldItem> UsedFieldItems { get; set; }
         private List<FieldPairs> FieldPairs { get; set; }
         private GameConfig GameConfig { get; set; }
-        FieldPairs LastPair;
-
-        private GameField28 View;
 
         #endregion
 
 
 
-        public GameViewModel(GameContent content, GameConfig config, GameField28 view)
+        public GameViewModel(GameContent content, GameConfig config)
         {
             this.Content = content;
             this.GameConfig = config;
-            this.View = view;
-
+            this.BonusGame = new BonusGame();
             InitGame();
             
             TurnOverAllFields(false);
@@ -56,14 +74,12 @@ namespace MatchingGame.ViewModels
             
             if (isFirstPick)            
             {
-                //TurnOverField(pickId, true);
                 FirstPick = pickId;                
                 isFirstPick = false;
                 return;
             }
             else
             {
-                //TurnOverField(pickId, true);
                 SecondPick = pickId;
                 CheckPics(FirstPick, pickId);
                 isFirstPick = true;
@@ -77,7 +93,7 @@ namespace MatchingGame.ViewModels
             {
                 if(this.GameConfig.WithBonusGame)
                 {
-                    ShowBonusGame();
+                    BonusGame.ShowBonusGame();
                 }                
 
             }
@@ -92,32 +108,9 @@ namespace MatchingGame.ViewModels
             }
         }
 
-        private void ShowBonusGame()
-        {
-            this.View.MainGrid.Visibility = Visibility.Hidden;
-            this.View.BonusGrid.Visibility = Visibility.Visible;
-            this.View.BonusGrid.DataContext = LastPair;
-        }
-
-        public void CloseBonusGame()       
-        {            
-            this.View.BonusGrid.Visibility = Visibility.Hidden;
-            this.View.MainGrid.Visibility = Visibility.Visible;
-            View.PairHeadline.Text = "What is the headline / topic of both pictures?";
-            View.PicA.Text = "What is Picture A?";
-            View.PicB.Text = "What is Picutre B?";
-        }
-
-        public void ShowBonusResult()
-        {
-            View.PairHeadline.Text = LastPair.Description;
-            View.PicA.Text = LastPair.FieldA.Description;
-            View.PicB.Text = LastPair.FieldB.Description;
-        }
-
         private bool IsPickCorrect(int idA, int idB)
         {
-            LastPair = null;
+            BonusGame.CurrentPair = null;
             bool res = false;
 
             var pair = FieldPairs.First(p => p.FieldA.Id == idA || p.FieldB.Id == idA);
@@ -129,7 +122,7 @@ namespace MatchingGame.ViewModels
 
             if (res)
             {
-                LastPair = pair;
+                BonusGame.CurrentPair = pair;
             }
 
             return res;
@@ -173,9 +166,7 @@ namespace MatchingGame.ViewModels
                     this.UsedFieldItems.Add(pair.FieldA);
                     this.UsedFieldItems.Add(pair.FieldB);
                 }
-                UsedFieldItems.Shuffle();
-
-                
+                UsedFieldItems.Shuffle();              
 
             }
             catch(Exception ex)
@@ -244,6 +235,9 @@ namespace MatchingGame.ViewModels
             return res;
         }
 
-        
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

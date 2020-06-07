@@ -26,7 +26,7 @@ namespace MatchingGame.UserControlls
         public GameField(GameContent content, GameConfig size)
         {
             InitializeComponent();
-            gameViewModel = new GameViewModel(content, size, null);
+            gameViewModel = new GameViewModel(content, size);
             this.DataContext = gameViewModel;
 
         }

@@ -27,7 +27,7 @@ namespace MatchingGame.UserControlls
         public GameField28(GameContent content, GameConfig config)
         {
             InitializeComponent();
-            gameViewModel = new GameViewModel(content, config, this);
+            gameViewModel = new GameViewModel(content, config);
             this.DataContext = gameViewModel;
 
             if(config.WithAdminPanel)

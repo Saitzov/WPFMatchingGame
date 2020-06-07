@@ -39,12 +39,12 @@ namespace MatchingGame.Views
 
         private void ShowBonusResults(object sender, RoutedEventArgs e)
         {
-            gameViewModel.ShowBonusResult();
+            gameViewModel.BonusGame.ShowResult();
         }
 
         private void CloseBonus(object sender, RoutedEventArgs e)
         {
-            gameViewModel.CloseBonusGame();
+            gameViewModel.BonusGame.CloseBonusGame();
         }
     }
 }

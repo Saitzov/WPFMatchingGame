@@ -12,9 +12,10 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Grid x:Name="MainGrid"  ShowGridLines="True" Visibility="Visible">
+        <Grid x:Name="MainGrid"  ShowGridLines="True" Visibility="{Binding BonusGame.IsMainGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -78,14 +79,14 @@
         <TextBlock Grid.Row="4" Grid.Column="0" Text="D"  />
         <Button Name="btn_back" Grid.Column="0" Grid.Row="0" Width="40" Height="40" Content="Back" />
     </Grid>
-        <Grid x:Name="BonusGrid" Visibility="Hidden">
+        <Grid x:Name="BonusGrid" DataContext="{Binding BonusGame}" Visibility="{Binding IsBonusGameVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="PairHeadline" Grid.Row="0" Grid.Column="0" Text="What is the headline / topic of both pictures? " />
+            <TextBlock x:Name="PairHeadline" Grid.Row="0" Grid.Column="0" Text="{Binding Headline}" />
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -95,10 +96,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
-                <Image Margin="2" x:Name="LeftImage"  Grid.Column="0" Source="{Binding FieldA.CurrentDisplayPath}" />
-                <Image Margin="2" x:Name="RightImage" Grid.Column="1" Source="{Binding FieldB.CurrentDisplayPath}" />
-                <TextBlock x:Name="PicA" Grid.Row="1" Grid.Column="0" Text="What is Picture A?" />
-                <TextBlock x:Name="PicB" Grid.Row="1" Grid.Column="1" Text="What is Picutre B?"/>
+                <Image Margin="2" x:Name="LeftImage"  Grid.Column="0" Source="{Binding CurrentPair.FieldA.CurrentDisplayPath}" />
+                <Image Margin="2" x:Name="RightImage" Grid.Column="1" Source="{Binding CurrentPair.FieldB.CurrentDisplayPath}" />
+                <TextBlock x:Name="PicA" Grid.Row="1" Grid.Column="0" Text="{Binding PictureAText}" TextWrapping="Wrap" />
+                <TextBlock x:Name="PicB" Grid.Row="1" Grid.Column="1" Text="{Binding PictureBText}" TextWrapping="Wrap"/>
 
             </Grid>
            
